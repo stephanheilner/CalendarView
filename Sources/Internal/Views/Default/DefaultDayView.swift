@@ -14,6 +14,7 @@ import SwiftUI
 struct DefaultDayView: DayView {
     let date: Date
     let isCurrentMonth: Bool
+    var isDateAvailable: ((Date) -> Bool)?
     let selectedDate: Binding<Date?>?
     let selectedRange: Binding<MDateRange?>?
 }

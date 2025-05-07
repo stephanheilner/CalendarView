@@ -8,7 +8,6 @@
 //
 //  Copyright ©2023 Mijick. Licensed under MIT License.
 
-
 import SwiftUI
 
 struct MonthView: View {
@@ -16,7 +15,6 @@ struct MonthView: View {
     @Binding var selectedRange: MDateRange?
     let data: Data.MonthView
     let config: CalendarConfig
-
 
     var body: some View {
         LazyVStack(spacing: config.daysSpacing.vertical) {
@@ -27,6 +25,7 @@ struct MonthView: View {
         .animation(animation, value: selectedRange?.getRange())
     }
 }
+
 private extension MonthView {
     func createSingleRow(_ dates: [Date]) -> some View {
         HStack(spacing: config.daysSpacing.horizontal) {
@@ -34,16 +33,19 @@ private extension MonthView {
         }
     }
 }
+
 private extension MonthView {
     func createDayView(_ date: Date) -> some View {
-        config.dayView(date, isCurrentMonth(date), $selectedDate, $selectedRange).erased()
+        config.dayView(date, isCurrentMonth(date), { _ in true }, $selectedDate, $selectedRange).erased()
     }
 }
+
 private extension MonthView {
     func isCurrentMonth(_ date: Date) -> Bool { data.month.isSame(.month, as: date) }
 }
 
 // MARK: - Others
+
 private extension MonthView {
     var animation: Animation { .spring(response: 0.32, dampingFraction: 1, blendDuration: 0) }
 }
